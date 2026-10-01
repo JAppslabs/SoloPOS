@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Política de Privacidad — Solo POS</title>
+  <meta name="description" content="Política de Privacidad de Solo POS.">
+  <style>
+    :root{color-scheme:dark;--bg:#0b0f17;--panel:#111827;--text:#e5e7eb;--muted:#9ca3af;--accent:#06b6d4}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    main{max-width:900px;margin:auto;padding:48px 24px 80px}header{margin-bottom:40px}h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:.2em 0}h2{margin-top:42px}.meta,.summary{background:var(--panel);border:1px solid #1f2937;border-radius:14px;padding:20px;margin:20px 0}.meta p{margin:4px 0}.muted{color:var(--muted)}a{color:var(--accent)}li{margin:8px 0}.back{display:inline-block;margin-bottom:24px;text-decoration:none}
+  </style>
+</head>
+<body>
+<main>
+<a class="back" href="index.html">← Documentos legales de Solo POS</a>
+<header>
+  <h1>Política de Privacidad</h1>
+  <p class="muted">SOLO POS / PRIVACY POLICY</p>
+  <div class="meta">
+    <p><strong>Fecha de entrada en vigor:</strong> Octubre 2026</p>
+    <p><strong>Nombre Comercial:</strong> Solo POS</p>
+    <p><strong>Contacto Oficial:</strong> <a href="mailto:contacto@solopos.app">contacto@solopos.app</a></p>
+  </div>
+</header>
+
+<section class="summary">
+<h2>Resumen en lenguaje claro</h2>
+<ul>
+<li><strong>Cero rastreo:</strong> Solo POS no recopila, no almacena en la nube, no rastrea ni vende sus datos comerciales o personales.</li>
+<li><strong>Procesamiento local:</strong> Sus transacciones, inventarios, registros de clientes y arqueos de caja residen únicamente en su dispositivo móvil bajo cifrado AES-256.</li>
+<li><strong>Sin servidores externos:</strong> No existen servidores corporativos intermedios con acceso a su negocio. La información nunca abandona su custodia física.</li>
+<li><strong>Red local privada:</strong> La sincronización multipunto opera exclusivamente dentro de su propia red Wi-Fi local sin transitar por internet.</li>
+</ul>
+</section>
+
+<h2>1. Alcance y jurisdicción aplicable</h2>
+<p>El presente documento se estructura en cumplimiento de:</p>
+<ol type="a">
+<li>Estados Unidos Mexicanos: Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), su Reglamento y criterios del INAI.</li>
+<li>Estados Unidos de América: Federal Trade Commission Act (FTC Act - 15 U.S.C. § 45), California Online Privacy Protection Act (CalOPPA) y California Consumer Privacy Act (CCPA/CPRA - Cal. Civ. Code § 1798.100 et seq.).</li>
+</ol>
+
+<h2>2. Principio de datos cero (Zero-Data by Design)</h2>
+<ul>
+<li><strong>Inexistencia de transmisión remota:</strong> El desarrollador no recopila, sincroniza, monitorea ni traslada a servidores centrales datos financieros, catálogos, datos de contacto de clientes finales ni métricas de comportamiento.</li>
+<li><strong>Almacenamiento local cifrado:</strong> Todos los registros introducidos en el sistema residen en el almacenamiento aislado del sistema operativo Android, protegidos mediante la librería criptográfica SQLCipher bajo el estándar de cifrado simétrico AES-256.</li>
+<li><strong>Ausencia de rastreadores:</strong> El software carece de identificadores analíticos externos, cookies, kits de desarrollo publicitario (SDKs) o balizas web.</li>
+</ul>
+
+<h2>3. Arquitectura P2P local y modelo BYOC (Bring Your Own Connection)</h2>
+<p>Las transferencias de información para comanderos y terminales sincronizadas operan mediante un servidor HTTP local embebido (Ktor).</p>
+<ul>
+<li>Toda transmisión ocurre punto a punto (P2P) entre las antenas de los dispositivos enlazados a la red Wi-Fi privada del establecimiento.</li>
+<li>Ningún paquete transita por ruteadores externos bajo control de Solo POS. La seguridad perimetral del enlace inalámbrico es responsabilidad operativa exclusiva del usuario.</li>
+</ul>
+
+<h2>4. Ejercicio de derechos ARCO (México) y derechos CCPA/CPRA (EE. UU.)</h2>
+<ul>
+<li><strong>México (Derechos ARCO):</strong> Dado que el desarrollador carece de posesión, control o copias de las bases de datos locales generadas en la aplicación, se encuentra materialmente imposibilitado para tramitar solicitudes de Acceso, Rectificación, Cancelación u Oposición. El titular ejerce dichos derechos directamente desde la interfaz del sistema modificando o eliminando los registros de su dispositivo.</li>
+<li><strong>Estados Unidos (CCPA/CPRA):</strong> Solo POS no enajena, comparte ni transfiere datos personales a terceros con fines de lucro o prospección comercial. Los derechos de supresión y portabilidad se ejecutan mediante la exportación o depuración local de los archivos del sistema.</li>
+</ul>
+
+<h2>5. Privacidad de menores</h2>
+<p>Solo POS es una solución enfocada al ámbito mercantil y comercial. No recopila de forma directa ni consciente información correspondiente a menores de edad.</p>
+
+<p class="muted">Última actualización: Octubre 2026</p>
+</main>
+</body>
+</html>
