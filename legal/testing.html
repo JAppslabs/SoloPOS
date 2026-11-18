@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Test SoloPOS — Android volunteer invitation</title>
-<meta name="description" content="Help test SoloPOS offline sales, inventory and table management. Join the Google Group, claim a free promo code in 1 click and install on Google Play.">
+<meta name="description" content="Help test SoloPOS offline sales, inventory and table management. Join the Google Group, opt into the closed test and unlock your free promo code on Google Play.">
 <style>
 :root{--navy:#102343;--green:#00c96a;--cream:#fffcf6;--muted:#536173}*{box-sizing:border-box}
 body{margin:0;background:var(--cream);color:var(--navy);font:17px/1.65 system-ui,-apple-system,sans-serif}
@@ -13,17 +13,22 @@ header,main,footer{max-width:1040px;margin:auto;padding:24px}header{display:flex
 .hero{padding:58px 0 36px;max-width:820px}.eyebrow{font-size:13px;font-weight:800;letter-spacing:2px;color:#007840;text-transform:uppercase}
 h1{font-size:clamp(38px,7vw,66px);line-height:1.07;letter-spacing:-2px;margin:18px 0 24px}h2{font-size:29px;line-height:1.25;letter-spacing:-.6px}h3{font-size:21px;margin:0 0 10px}
 .lead{font-size:21px;color:var(--muted);max-width:700px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 15px}
-a{color:#006c3b;text-underline-offset:4px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:10px;background:var(--green);color:var(--navy);text-decoration:none;font-weight:750;border:2px solid transparent;cursor:pointer;font-size:inherit;font-family:inherit}.btn.secondary{background:transparent;border-color:#bdc9c5}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #087dff;outline-offset:4px}.small{font-size:14px;color:var(--muted)}
+a{color:#006c3b;text-underline-offset:4px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:10px;background:var(--green);color:var(--navy);text-decoration:none;font-weight:750;border:2px solid transparent;cursor:pointer;font-size:inherit;font-family:inherit}.btn.secondary{background:transparent;border-color:#bdc9c5}.btn:disabled{opacity:.48;cursor:not-allowed}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #087dff;outline-offset:4px}.small{font-size:14px;color:var(--muted)}
 .note{padding:22px 25px;background:var(--navy);color:white;border-radius:15px;margin:10px 0 38px}.note p{margin:0}.note p+p{margin-top:10px}.note strong{color:#71ecae}.note code{background:rgba(255,255,255,.14);padding:2px 6px;border-radius:6px;font-size:15px}
 .promo-box{border:2px solid #00a859;background:white;border-radius:16px;padding:28px;margin:32px 0}.promo-box h2{margin-top:0}
+.gate-warn{background:#fff4d8;border:1px solid #e4ba52;color:#3f2d00;border-radius:12px;padding:14px 16px;margin:14px 0 18px;font-size:15px}
+.gate-list{display:grid;gap:12px;margin:16px 0 20px}
+.gate-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1px solid #d7dfda;border-radius:12px;background:#fffcf6;cursor:pointer;font-size:15px}
+.gate-item input{width:20px;height:20px;margin-top:2px;flex:0 0 auto;accent-color:#008847;cursor:pointer}
 .promo-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:clamp(20px,3.2vw,28px);font-weight:800;letter-spacing:1.5px;background:#f0f7f3;color:var(--navy);border:1px dashed #8bc4a7;border-radius:12px;padding:16px 20px;text-align:center;margin:18px 0;word-break:break-all;user-select:all}
 .promo-actions{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 10px}
+[hidden]{display:none!important}
 .steps{display:grid;grid-template-columns:1fr 1fr;gap:18px;list-style:none;counter-reset:step;padding:0}.steps li{counter-increment:step;border:1px solid #d7dfda;border-radius:14px;background:white;padding:25px}
 .steps li:before{content:counter(step,decimal-leading-zero);display:block;color:#007840;font-size:14px;font-weight:800;margin-bottom:14px}.steps p{color:var(--muted)}.steps a{font-weight:750}
 section{margin:40px 0}.checklist{padding-left:24px}.checklist li{margin:12px 0}details{border-top:1px solid #d7dfda;padding:18px 0}summary{cursor:pointer;font-weight:750}details p{color:var(--muted)}
 .contact{background:#edf5ef;border-radius:15px;padding:28px;overflow-wrap:anywhere}footer{border-top:1px solid #d7dfda;font-size:14px;color:var(--muted);padding-bottom:40px}footer a{display:inline-block;margin:8px 20px 8px 0}
-@media(max-width:620px){header,main,footer{padding-left:20px;padding-right:20px}.hero{padding-top:35px}.steps{grid-template-columns:1fr}.badge{font-size:11px}.lead{font-size:19px}.actions .btn,.promo-actions .btn{width:100%}}
+@media(max-width:620px){header,main,footer{padding-left:20px;padding-right:20px}.hero{padding-top:35px}.steps{grid-template-columns:1fr}.badge{font-size:11px}.lead{font-size:19px}.actions .btn,.promo-actions .btn,#unlockBtn{width:100%}}
 </style>
 </head>
 <body>
@@ -33,8 +38,8 @@ section{margin:40px 0}.checklist{padding-left:24px}.checklist li{margin:12px 0}d
 <div class="eyebrow">Android closed test · Free 1-click promo codes</div>
 <h1>Works offline.<br>Gets better with your feedback.</h1>
 <p class="lead">SoloPOS records sales, inventory and tables or workstations on your Android phone or tablet. It is an administrative tool; it does not process bank payments.</p>
-<div class="actions"><a class="btn" href="#promo">Get your free code →</a><a class="btn secondary" href="#steps">See installation steps</a></div>
-<p class="small">Instant free access using the 1-click promo code dispenser below (or the $0.00 closed-test offer when active in your region). No purchase or positive review is requested.</p>
+<div class="actions"><a class="btn" href="#steps">Install free in 3 steps →</a><a class="btn secondary" href="#code">Unlock free promo code</a></div>
+<p class="small">Instant free access using the 1-click promo code dispenser after completing Steps 1 and 2 (or via the $0.00 closed-test offer when active in your region). No purchase or positive review is requested.</p>
 </div>
 
 <div class="note">
@@ -42,28 +47,40 @@ section{margin:40px 0}.checklist{padding-left:24px}.checklist li{margin:12px 0}d
 <p><strong>Testers Community:</strong> Already a member of <code>testers-community@googlegroups.com</code>? You are pre-authorized—you can go straight to Step 2 (“Become a tester”) without joining another group.</p>
 </div>
 
-<section id="promo" class="promo-box">
-<h2>Free promo code (1-click)</h2>
-<p>Join the Google Group and opt into the test first, then redeem the single-use code assigned to this device in Google Play to install SoloPOS at $0.00:</p>
-<div id="promoCode" class="promo-code" aria-live="polite">Loading code...</div>
-<div class="promo-actions">
-<a id="redeemBtn" class="btn" href="https://play.google.com/redeem" target="_blank" rel="noopener">Redeem in Google Play →</a>
-<button id="copyBtn" class="btn secondary" type="button">Copy code</button>
-<button id="nextBtn" class="btn secondary" type="button">Already redeemed? Get another code</button>
-</div>
-<p id="codeStatus" class="small">If Google Play says the code was already redeemed by another tester, click “Get another code” to try a different one.</p>
-<p class="small">All codes used or still seeing a price? <a href="mailto:juliocabrera9230@gmail.com?subject=SoloPOS%20free%20test%20code%20request&amp;body=Hi%20Julio%2C%20I%20joined%20the%20group%20and%20opted%20into%20the%20SoloPOS%20test%2C%20but%20the%20promo%20code%20did%20not%20work.%20Could%20you%20share%20a%20fresh%20code%3F">Email Julio for a fresh code →</a></p>
-</section>
-
 <section id="steps">
 <h2>Four steps to install for free</h2>
 <p>Use <strong>the same Google account</strong> in the group, the testing page and Google Play. These setup steps need internet; you can then test local features offline.</p>
 <ol class="steps">
 <li><h3>Join the Google Group</h3><p>If you are not already in <strong>testers-community@googlegroups.com</strong>, open “SoloPOS - Prueba cerrada” and click “Join group”. Access is instant.</p><a href="https://groups.google.com/g/solopos-pruebas" target="_blank" rel="noopener">Open the Google Group →</a></li>
 <li><h3>Opt into the test</h3><p>Open the testing page and click “Become a tester”. Joining a Google Group alone does not enroll you in the Google Play test.</p><a href="https://play.google.com/apps/testing/com.solopos.app" target="_blank" rel="noopener">Become a tester →</a></li>
-<li><h3>Redeem your free code</h3><p>Use the <a href="#promo">1-click promo code dispenser above</a> to redeem a free single-use code (or download directly if the $0.00 offer is active in your country).</p><a href="#promo">Go to promo code dispenser ↑</a></li>
-<li><h3>Install and test for 14 days</h3><p>Return to the testing page or Google Play to download SoloPOS with the same Google account, and keep it installed for at least 14 consecutive days.</p><a href="https://play.google.com/store/apps/details?id=com.solopos.app" target="_blank" rel="noopener">Open SoloPOS on Google Play →</a></li>
+<li><h3>Download free on Google Play</h3><p>Open SoloPOS on Google Play and download it if the $0.00 temporary offer is active in your country. Check that the same Google account is selected.</p><a href="https://play.google.com/store/apps/details?id=com.solopos.app" target="_blank" rel="noopener">Open SoloPOS on Google Play →</a></li>
+<li><h3>Still seeing a price? Unlock a free code</h3><p>After completing Steps 1 and 2 above, confirm the checklist below to unlock a single-use free promo code and redeem it in 1 click.</p><a href="#code">Unlock my free code ↓</a></li>
 </ol>
+</section>
+
+<section id="code" class="promo-box">
+<h2>Free promo code (1-click)</h2>
+<div class="gate-warn">⚠️ <strong>Important so your code isn't wasted!</strong> If you redeem a code before joining the Google Group (Step 1) and clicking “Become a tester” (Step 2), Google Play will <strong>NOT</strong> count your test.</div>
+<div id="promo-gate">
+<p class="small">Confirm all 3 points below before revealing your assigned code:</p>
+<div class="gate-list">
+<label class="gate-item" for="chk1"><input type="checkbox" id="chk1"><span>1. I have already joined the Google Group (“SoloPOS - Prueba cerrada” or I am in Testers Community).</span></label>
+<label class="gate-item" for="chk2"><input type="checkbox" id="chk2"><span>2. I opened the testing page and clicked “Become a tester” (it shows “You are a tester”).</span></label>
+<label class="gate-item" for="chk3"><input type="checkbox" id="chk3"><span>3. I agree to install SoloPOS, open it to test it, and keep it installed for 14 consecutive days.</span></label>
+</div>
+<button id="unlockBtn" class="btn" type="button" disabled>Unlock my 1-click free code →</button>
+</div>
+<div id="promo-unlocked" hidden>
+<p>Redeem the single-use code assigned to this device in Google Play using the same Google account from Step 2 (max 3 code changes per device):</p>
+<div id="promoCode" class="promo-code" aria-live="polite">---</div>
+<div class="promo-actions">
+<a id="redeemBtn" class="btn" href="https://play.google.com/redeem" target="_blank" rel="noopener">Redeem in Google Play →</a>
+<button id="copyBtn" class="btn secondary" type="button">Copy code</button>
+<button id="nextBtn" class="btn secondary" type="button">Already redeemed? Get another code</button>
+</div>
+<p id="codeStatus" class="small">If Google Play says the code was already redeemed by another tester, click “Get another code” to try a different one.</p>
+<p class="small">Out of changes or still seeing a price? <a href="mailto:juliocabrera9230@gmail.com?subject=SoloPOS%20free%20test%20code%20request&amp;body=Hi%20Julio%2C%20I%20joined%20the%20group%20and%20opted%20into%20the%20SoloPOS%20test%2C%20but%20the%20promo%20code%20did%20not%20work.%20Could%20you%20share%20a%20fresh%20code%3F">Email Julio for a fresh code →</a></p>
+</div>
 </section>
 
 <section>
@@ -78,15 +95,15 @@ section{margin:40px 0}.checklist{padding-left:24px}.checklist li{margin:12px 0}d
 
 <section>
 <h2>Need help?</h2>
-<details><summary>Google Play shows a price or an access error</summary><p>Please do not pay to help with this invitation. Check that you joined the group (or are in testers-community@googlegroups.com), opted into the test and selected the same Google account throughout. Use the 1-click dispenser above to redeem a free code; if a code says already redeemed, click “Get another code”, or email us if all codes are exhausted.</p></details>
-<details><summary>Is this free? Is there a subscription?</summary><p>Yes, testers can install SoloPOS completely free using a promo code from the dispenser above (or during the $0.00 closed-test offer). SoloPOS is intended as a one-time purchase with no subscription.</p></details>
+<details><summary>Google Play shows a price or an access error</summary><p>Please do not pay to help with this invitation. Check that you joined the group (or are in testers-community@googlegroups.com), clicked “Become a tester”, and selected the same Google account throughout before unlocking and redeeming your code. If your code was already redeemed, click “Get another code” (up to 3 changes) or email us before buying anything.</p></details>
+<details><summary>Is this free? Is there a subscription?</summary><p>Yes, testers can install SoloPOS completely free using a promo code unlocked above (or during the $0.00 closed-test offer). SoloPOS is intended as a one-time purchase with no subscription.</p></details>
 <details><summary>Do I need a printer or real business data?</summary><p>No. You can test sales, inventory and tables without a printer. Do not use real customer or business data. If you already have SoloPOS with important data, contact us before replacing or uninstalling it or restoring a backup.</p></details>
-<details><summary>Can I share this invitation?</summary><p>Yes, share this page. Each tester should join the group (or be in Testers Community), opt into the test with their own Google account, and claim a code on their own device.</p></details>
+<details><summary>Can I share this invitation?</summary><p>Yes, share this page. Each tester should join the group (or be in Testers Community), opt into the test with their own Google account, and unlock their own code on their device.</p></details>
 </section>
 
 <section class="contact">
 <h2>We can help you get started</h2>
-<p>Have questions, found an issue, or need a fresh promo code? Contact Julio Antonio Cabrera González:</p>
+<p>Have questions, found an issue, or reached your code change limit? Contact Julio Antonio Cabrera González:</p>
 <a href="mailto:juliocabrera9230@gmail.com">juliocabrera9230@gmail.com</a>
 <p class="small">Never send passwords, bank details or backups containing real business information.</p>
 </section>
@@ -117,8 +134,17 @@ section{margin:40px 0}.checklist{padding-left:24px}.checklist li{margin:12px 0}d
     'T5NN589F6AU8S56ZA92E60M',
     'DGPF8243S1L6Z1TVFV7G4FH'
   ];
+  var MAX_ROTATIONS = 3;
   var KEY_CURR = 'solopos_promo_curr';
   var KEY_TRIED = 'solopos_promo_tried';
+  var KEY_ROT = 'solopos_promo_rotations';
+  var KEY_UNLOCKED = 'solopos_promo_unlocked';
+  var chk1 = document.getElementById('chk1');
+  var chk2 = document.getElementById('chk2');
+  var chk3 = document.getElementById('chk3');
+  var unlockBtn = document.getElementById('unlockBtn');
+  var gateEl = document.getElementById('promo-gate');
+  var unlockedEl = document.getElementById('promo-unlocked');
   var codeEl = document.getElementById('promoCode');
   var redeemEl = document.getElementById('redeemBtn');
   var copyBtn = document.getElementById('copyBtn');
@@ -136,29 +162,57 @@ section{margin:40px 0}.checklist{padding-left:24px}.checklist li{margin:12px 0}d
   function writeStr(k, v){
     try { localStorage.setItem(k, v); } catch(e){}
   }
+  var tried = readJson(KEY_TRIED, []);
+  if (!Array.isArray(tried)) tried = [];
+  var rotations = parseInt(readStr(KEY_ROT) || '0', 10);
+  if (isNaN(rotations) || rotations < 0) rotations = 0;
+  var current = null;
   function pickRandom(exclude){
     var pool = CODES.filter(function(c){ return exclude.indexOf(c) === -1; });
     if (!pool.length) {
       pool = CODES.filter(function(c){ return c !== current; });
-      tried = current ? [current] : [];
-      writeStr(KEY_TRIED, JSON.stringify(tried));
     }
     return pool[Math.floor(Math.random() * pool.length)];
+  }
+  function updateNextState(){
+    var rem = Math.max(0, MAX_ROTATIONS - rotations);
+    if (rem <= 0) {
+      nextBtn.disabled = true;
+      statusEl.textContent = 'Limit of 3 code changes reached on this device. If none worked, please email juliocabrera9230@gmail.com.';
+    }
   }
   function render(code){
     current = code;
     writeStr(KEY_CURR, code);
     codeEl.textContent = code;
     redeemEl.href = 'https://play.google.com/redeem?code=' + encodeURIComponent(code);
+    updateNextState();
   }
-  var tried = readJson(KEY_TRIED, []);
-  if (!Array.isArray(tried)) tried = [];
-  var current = readStr(KEY_CURR);
-  if (!current || CODES.indexOf(current) === -1) {
-    current = pickRandom(tried);
+  function revealDispenser(){
+    var saved = readStr(KEY_CURR);
+    if (!saved || CODES.indexOf(saved) === -1) {
+      saved = pickRandom(tried);
+    }
+    render(saved);
+    gateEl.hidden = true;
+    unlockedEl.hidden = false;
   }
-  render(current);
+  function syncGate(){
+    unlockBtn.disabled = !(chk1.checked && chk2.checked && chk3.checked);
+  }
+  chk1.addEventListener('change', syncGate);
+  chk2.addEventListener('change', syncGate);
+  chk3.addEventListener('change', syncGate);
+  unlockBtn.addEventListener('click', function(){
+    if (unlockBtn.disabled) return;
+    writeStr(KEY_UNLOCKED, '1');
+    revealDispenser();
+  });
+  if (readStr(KEY_UNLOCKED) === '1') {
+    revealDispenser();
+  }
   copyBtn.addEventListener('click', function(){
+    if (!current) return;
     var done = function(){
       copyBtn.textContent = 'Copied!';
       setTimeout(function(){ copyBtn.textContent = 'Copy code'; }, 1800);
@@ -176,13 +230,22 @@ section{margin:40px 0}.checklist{padding-left:24px}.checklist li{margin:12px 0}d
     }
   });
   nextBtn.addEventListener('click', function(){
+    if (!current || rotations >= MAX_ROTATIONS) {
+      updateNextState();
+      return;
+    }
     if (tried.indexOf(current) === -1) {
       tried.push(current);
       writeStr(KEY_TRIED, JSON.stringify(tried));
     }
+    rotations += 1;
+    writeStr(KEY_ROT, String(rotations));
     var next = pickRandom(tried);
     render(next);
-    statusEl.textContent = 'New code assigned. ' + Math.max(0, CODES.length - tried.length) + ' untried codes left on this device.';
+    var rem = Math.max(0, MAX_ROTATIONS - rotations);
+    if (rem > 0) {
+      statusEl.textContent = 'New code assigned. ' + rem + ' change(s) left on this device.';
+    }
   });
 })();
 </script>
