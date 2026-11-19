@@ -1,11 +1,645 @@
-<!-- GitHub Pages deployment trigger -->
 <!doctype html>
 <html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Documentos legales — SoloPOS</title>
-<style>:root{color-scheme:dark}body{margin:0;background:#102343;color:#e5e7eb;font:16px/1.6 system-ui,sans-serif}main{max-width:760px;margin:auto;padding:64px 24px}h1{font-size:42px}p{color:#9ca3af}.card{display:block;padding:24px;margin:16px 0;background:#111827;border:1px solid #1f2937;border-radius:14px;color:#81e9ba;text-decoration:none}.card strong{display:block;color:#fff;font-size:20px}</style></head>
-<body><main><h1>SoloPOS</h1><p>Privacidad, condiciones de uso y guía de prueba cerrada de SoloPOS.</p>
-<a class="card" href="prueba.html"><strong>Prueba cerrada (Español)</strong>Guía para probadores · Descarga gratuita en Google Play</a>
-<a class="card" href="testing.html"><strong>Closed Testing (English)</strong>Tester guide · Free download on Google Play</a>
-<a class="card" href="terminos-y-condiciones.html"><strong>Términos y Condiciones</strong>Terms and Conditions</a>
-<a class="card" href="politica-de-privacidad.html"><strong>Política de Privacidad</strong>Privacy Policy</a>
-<p>Contacto: <a href="mailto:juliocabrera9230@gmail.com">juliocabrera9230@gmail.com</a></p></main></body></html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SoloPOS — Punto de Venta Offline para Android</title>
+<meta name="description" content="SoloPOS v3.0.0: tu punto de venta completo en Android. 100% offline, sin mensualidades. Pago único de $19.99 USD en Gumroad. Próximamente en Google Play.">
+<meta name="theme-color" content="#102343">
+<style>
+:root{
+  --navy:#102343;
+  --navy-deep:#0b1a30;
+  --green:#00c96a;
+  --green-dark:#008847;
+  --green-text:#006c3b;
+  --cream:#fffcf6;
+  --surface:#ffffff;
+  --tint:#edf5ef;
+  --muted:#536173;
+  --border:#dce4df;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--navy);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--green-text);text-underline-offset:4px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #087dff;outline-offset:3px}
+.wrap{max-width:1120px;margin:auto;padding:0 24px}
+
+/* Header */
+header{position:sticky;top:0;z-index:20;background:rgba(255,252,246,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:70px;flex-wrap:wrap;padding:10px 0}
+.brand{display:inline-flex;align-items:center;gap:10px;font-size:24px;font-weight:850;letter-spacing:-.8px;color:var(--navy);text-decoration:none}
+.brand span{color:var(--green-dark)}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:var(--navy);color:var(--green);display:inline-flex;align-items:center;justify-content:center}
+.nav-links{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--navy);text-decoration:none;font-weight:600;font-size:15px}
+.nav-links a:hover{color:var(--green-dark)}
+.nav-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.lang-btn{background:transparent;border:1px solid #c3d0c9;color:var(--navy);border-radius:10px;padding:8px 13px;font:600 14px/1 inherit;cursor:pointer}
+.lang-btn:hover{border-color:var(--navy)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:11px;background:var(--green);color:var(--navy-deep);text-decoration:none;font-weight:750;font-size:15px;border:2px solid transparent;cursor:pointer;transition:transform .12s ease,background .15s ease}
+.btn:hover{background:#00da73;transform:translateY(-1px)}
+.btn.sm{padding:9px 15px;font-size:14px}
+.btn.secondary{background:var(--surface);border-color:#c6d3cc;color:var(--navy)}
+.btn.secondary:hover{background:#f5f9f6;border-color:var(--navy)}
+.btn.navy{background:var(--navy);color:#ffffff}
+.btn.navy:hover{background:#17325e}
+
+/* Hero */
+.hero{padding:56px 0 36px}
+.hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:36px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--tint);border:1px solid #bfd8c8;color:var(--green-text);font-size:13px;font-weight:750;letter-spacing:.4px}
+h1{font-size:clamp(34px,5.5vw,58px);line-height:1.08;letter-spacing:-1.8px;margin:18px 0 20px;color:var(--navy-deep)}
+.lead{font-size:19px;color:var(--muted);max-width:650px;margin:0 0 28px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+.play-pill{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:12px;background:var(--surface);border:1px solid var(--border);min-height:50px}
+.play-pill-title{font-size:14px;font-weight:750;color:var(--navy);line-height:1.25}
+.play-pill-sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.trust-strip{display:flex;flex-wrap:wrap;gap:10px 22px;margin:24px 0 0;padding:0;list-style:none;font-size:14px;color:var(--muted);font-weight:600}
+.trust-strip li{display:inline-flex;align-items:center;gap:7px}
+
+/* Hero Preview Card */
+.hero-card{background:linear-gradient(155deg,var(--navy-deep),#163059);color:#ffffff;border-radius:20px;padding:28px;border:1px solid #24406e;box-shadow:0 20px 44px rgba(11,26,48,.16)}
+.hero-card-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:18px}
+.tag-live{display:inline-flex;align-items:center;gap:6px;background:rgba(0,201,106,.16);color:#71ecae;border:1px solid rgba(0,201,106,.35);padding:4px 11px;border-radius:999px;font-size:12px;font-weight:750}
+.tag-soon{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.09);color:#dbeafe;border:1px solid rgba(255,255,255,.18);padding:4px 11px;border-radius:999px;font-size:12px;font-weight:700}
+.price-big{font-size:40px;font-weight:850;letter-spacing:-1.2px;line-height:1;margin:8px 0 6px}
+.price-sub{color:#b6c6dd;font-size:14px;margin:0 0 18px}
+.hero-specs{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px;font-size:14.5px;color:#e5edf8}
+.hero-specs li{display:flex;align-items:flex-start;gap:9px}
+.hero-card .btn{width:100%}
+.hero-card-foot{margin:14px 0 0;font-size:13px;color:#a9bbd4;text-align:center}
+.hero-card-foot a{color:#71ecae}
+
+/* Sections */
+section{padding:56px 0;border-top:1px solid var(--border)}
+.sec-head{max-width:720px;margin-bottom:32px}
+.sec-kicker{font-size:12.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px}
+h2{font-size:clamp(26px,3.6vw,36px);line-height:1.18;letter-spacing:-.8px;margin:0 0 12px;color:var(--navy-deep)}
+.sec-desc{color:var(--muted);margin:0;font-size:17px}
+
+/* Features Grid */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px}
+.feat-icon{width:42px;height:42px;border-radius:11px;background:var(--tint);color:var(--green-dark);display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px}
+.feat-card h3{font-size:18.5px;margin:0 0 8px;color:var(--navy-deep)}
+.feat-card p{margin:0;color:var(--muted);font-size:15px}
+
+/* Pricing Comparison */
+.pricing-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch}
+.plan-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;display:flex;flex-direction:column;justify-content:space-between}
+.plan-card.featured{border:2px solid var(--green);box-shadow:0 14px 34px rgba(0,201,106,.10)}
+.plan-badge{display:inline-block;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px}
+.plan-badge.buy{background:var(--tint);color:var(--green-text)}
+.plan-badge.soon{background:#eef2f7;color:#334155}
+.plan-price{font-size:36px;font-weight:850;letter-spacing:-1px;margin:6px 0 4px;color:var(--navy-deep)}
+.plan-note{font-size:14px;color:var(--muted);margin:0 0 18px}
+.plan-list{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px;font-size:15px;color:var(--navy)}
+.plan-list li{display:flex;align-items:flex-start;gap:9px}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;list-style:none;counter-reset:step;padding:0;margin:0}
+.steps li{counter-increment:step;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px}
+.steps li:before{content:counter(step,decimal-leading-zero);display:inline-block;padding:3px 10px;border-radius:8px;background:var(--tint);color:var(--green-text);font-size:13px;font-weight:800;margin-bottom:14px}
+.steps h3{font-size:18.5px;margin:0 0 8px}
+.steps p{margin:0;color:var(--muted);font-size:15px}
+
+/* FAQ */
+.faq-list{max-width:860px}
+details{border-top:1px solid var(--border);padding:18px 0}
+details:last-child{border-bottom:1px solid var(--border)}
+summary{cursor:pointer;font-weight:750;font-size:16.5px;color:var(--navy-deep);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:20px;font-weight:700;color:var(--green-dark);flex-shrink:0}
+details[open] summary:after{content:"−"}
+details p{color:var(--muted);margin:12px 0 0;font-size:15.5px}
+
+/* Contact CTA */
+.cta-band{background:var(--navy);color:#ffffff;border-radius:20px;padding:34px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta-band h2{color:#ffffff;margin:0 0 8px}
+.cta-band p{color:#c5d3e6;margin:0;max-width:620px}
+.cta-band-actions{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:34px 0 48px;font-size:14px;color:var(--muted)}
+.footer-row{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.footer-links{display:flex;flex-wrap:wrap;gap:10px 20px}
+.footer-links a{color:var(--green-text);font-weight:600}
+
+@media(max-width:920px){
+  .hero-grid,.pricing-grid{grid-template-columns:1fr}
+  .feat-grid,.steps{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .wrap{padding:0 18px}
+  .nav-links{display:none}
+  .hero{padding:36px 0 28px}
+  .feat-grid,.steps{grid-template-columns:1fr}
+  .hero-ctas .btn,.hero-ctas .play-pill{width:100%}
+  .cta-band{padding:24px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 20h10"/><path d="M9 18v2"/><path d="M15 18v2"/><path d="M7 9h6"/><path d="M7 13h4"/><circle cx="16.5" cy="11" r="1.5"/></svg>
+      </span>
+      Solo<span>POS</span>
+    </a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#funciones" data-t="navFeatures">Funciones</a>
+      <a href="#precio" data-t="navPricing">Precio</a>
+      <a href="#instalacion" data-t="navInstall">Instalación</a>
+      <a href="#preguntas" data-t="navFaq">Preguntas</a>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="lang-btn" id="langToggle" aria-label="Switch language">English</button>
+      <a class="btn sm" href="https://juliocraft4.gumroad.com/l/solopos" target="_blank" rel="noopener" data-t="navBuy">Comprar — $19.99</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow" data-t="heroEyebrow">v3.0.0 · Android 7.0+ · 100% Offline · Pago único</div>
+        <h1 data-t="heroTitle">Tu punto de venta completo en Android. Sin internet. Sin mensualidades.</h1>
+        <p class="lead" data-t="heroLead">Registra ventas, controla inventario, organiza mesas o estaciones, imprime tickets Bluetooth y sincroniza varias cajas en tu Wi-Fi local — pagando una sola vez.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="https://juliocraft4.gumroad.com/l/solopos" target="_blank" rel="noopener" data-t="heroBuy">Comprar en Gumroad — $19.99 USD →</a>
+          <div class="play-pill">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4.5 3.6c-.3.3-.5.8-.5 1.4v14c0 .6.2 1.1.5 1.4l.1.1 7.8-7.8v-.2L4.6 3.5l-.1.1z" fill="#008847"/>
+              <path d="M15 15.1l-2.6-2.6v-.2L15 9.7l.1.1 3.1 1.7c.9.5.9 1.3 0 1.8l-3.1 1.7-.1.1z" fill="#00c96a"/>
+              <path d="M15.1 15l-2.7-2.7L4.5 20.4c.3.3.8.3 1.4 0l9.2-5.4z" fill="#102343"/>
+              <path d="M15.1 9.8L5.9 4.5c-.6-.3-1.1-.3-1.4 0l7.9 7.9 2.7-2.6z" fill="#3b82f6"/>
+            </svg>
+            <div>
+              <div class="play-pill-title" data-t="playSoonTitle">Próximamente en Google Play</div>
+              <div class="play-pill-sub"><a id="testerLinkHero" href="prueba.html" data-t="playSoonLink">¿Quieres unirte a la prueba cerrada? →</a></div>
+            </div>
+          </div>
+        </div>
+        <ul class="trust-strip">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#008847" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-t="trust1">Licencia hasta en 2 dispositivos Android</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#008847" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-t="trust2">Sin suscripciones ni comisiones</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#008847" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-t="trust3">Tus datos viven en tu equipo</span>
+          </li>
+        </ul>
+      </div>
+
+      <aside class="hero-card" aria-label="Resumen de licencia SoloPOS">
+        <div class="hero-card-top">
+          <span class="tag-live" data-t="cardTagLive">Disponible en Gumroad</span>
+          <span class="tag-soon" data-t="cardTagSoon">Play Store: Próximamente</span>
+        </div>
+        <div class="price-big">$19.99 <span style="font-size:16px;font-weight:600;color:#b6c6dd">USD</span></div>
+        <p class="price-sub" data-t="cardPriceSub">Pago único de por vida · Versión 3.0.0</p>
+        <ul class="hero-specs">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#71ecae" stroke-width="2.3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-t="cardSpec1">Instalador oficial SoloPOS-v3.0.0.apk firmado</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#71ecae" stroke-width="2.3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-t="cardSpec2">Clave única válida hasta en 2 dispositivos (caja + respaldo)</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#71ecae" stroke-width="2.3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-t="cardSpec3">Activación online 1 sola vez → 100% offline para siempre</span>
+          </li>
+        </ul>
+        <a class="btn" href="https://juliocraft4.gumroad.com/l/solopos" target="_blank" rel="noopener" data-t="cardBuy">Obtener licencia en Gumroad →</a>
+        <p class="hero-card-foot" data-t="cardFoot">¿Prefieres esperar a Google Play? <a id="testerLinkCard" href="prueba.html">Únete a la prueba cerrada</a>.</p>
+      </aside>
+    </div>
+  </div>
+
+  <section id="funciones">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker" data-t="featKicker">Todo lo que tu negocio necesita</div>
+        <h2 data-t="featTitle">Diseñado para cobrar rápido, incluso sin conexión</h2>
+        <p class="sec-desc" data-t="featDesc">Toda tu operación corre localmente en tu teléfono o tableta Android, sin depender de servidores externos ni caídas de internet.</p>
+      </div>
+      <div class="feat-grid">
+        <article class="feat-card">
+          <div class="feat-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <h3 data-t="f1Title">Ventas rápidas e inventario local</h3>
+          <p data-t="f1Desc">Registra ventas en segundos, controla existencias en tiempo real, aplica impuestos o descuentos y revisa cortes e historial.</p>
+        </article>
+        <article class="feat-card">
+          <div class="feat-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          </div>
+          <h3 data-t="f2Title">Áreas, mesas y estaciones</h3>
+          <p data-t="f2Desc">Organiza zonas de atención con mesas o estaciones personalizables, cuentas abiertas y estados visuales para restaurantes o cafeterías.</p>
+        </article>
+        <article class="feat-card">
+          <div class="feat-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="8" x2="7" y2="16"/><line x1="11" y1="8" x2="11" y2="16"/><line x1="15" y1="8" x2="15" y2="16"/><line x1="18" y1="8" x2="18" y2="16"/></svg>
+          </div>
+          <h3 data-t="f3Title">Escáner con cámara (ML Kit)</h3>
+          <p data-t="f3Desc">Escanea códigos de barras al instante usando la cámara de tu dispositivo para buscar productos o registrar entradas sin lector externo.</p>
+        </article>
+        <article class="feat-card">
+          <div class="feat-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          </div>
+          <h3 data-t="f4Title">Impresoras Bluetooth ESC/POS</h3>
+          <p data-t="f4Desc">Imprime tickets de venta y comandas directamente en impresoras térmicas portátiles o de mostrador compatibles con ESC/POS.</p>
+        </article>
+        <article class="feat-card">
+          <div class="feat-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/></svg>
+          </div>
+          <h3 data-t="f5Title">Multi-caja cifrada en tu Wi-Fi</h3>
+          <p data-t="f5Desc">Vincula dispositivos en tu misma red Wi-Fi local con comunicación cifrada para operar varias cajas sin subir tus datos a la nube.</p>
+        </article>
+        <article class="feat-card">
+          <div class="feat-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          </div>
+          <h3 data-t="f6Title">Respaldos locales (.solopos)</h3>
+          <p data-t="f6Desc">Exporta e importa copias completas de tu catálogo, ventas y configuración en archivos .solopos bajo tu control total.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="precio">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker" data-t="priceKicker">Disponibilidad y licencia</div>
+        <h2 data-t="priceTitle">Un solo pago. Sin rentas mensuales.</h2>
+        <p class="sec-desc" data-t="priceDesc">Descárgalo hoy mismo de forma directa en Gumroad o espera el lanzamiento público en Google Play Store.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="plan-card featured">
+          <div>
+            <span class="plan-badge buy" data-t="plan1Badge">Disponible hoy · Descarga directa</span>
+            <h3 style="margin:0;font-size:22px" data-t="plan1Name">Licencia SoloPOS en Gumroad</h3>
+            <div class="plan-price">$19.99 <span style="font-size:16px;font-weight:600;color:var(--muted)">USD</span></div>
+            <p class="plan-note" data-t="plan1Note">Pago único de por vida · Sin suscripciones ni comisiones</p>
+            <ul class="plan-list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#008847" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-t="plan1F1">APK oficial SoloPOS v3.0.0 firmado (Android 7.0+)</span></li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#008847" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-t="plan1F2">Clave de licencia única válida hasta en 2 dispositivos</span></li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#008847" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-t="plan1F3">Todas las funciones desbloqueadas, 100% offline</span></li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#008847" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-t="plan1F4">Soporte directo por correo con el desarrollador</span></li>
+            </ul>
+          </div>
+          <a class="btn" href="https://juliocraft4.gumroad.com/l/solopos" target="_blank" rel="noopener" data-t="plan1Cta">Comprar en Gumroad — $19.99 USD →</a>
+        </div>
+
+        <div class="plan-card">
+          <div>
+            <span class="plan-badge soon" data-t="plan2Badge">Próximamente en Play Store</span>
+            <h3 style="margin:0;font-size:22px" data-t="plan2Name">Google Play Store</h3>
+            <div class="plan-price" style="font-size:26px;margin-top:14px" data-t="plan2Status">En prueba cerrada</div>
+            <p class="plan-note" data-t="plan2Note">Lanzamiento público próximo en Google Play</p>
+            <ul class="plan-list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#536173" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><span data-t="plan2F1">Cumpliendo la prueba cerrada obligatoria de 14 días en Google Play</span></li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#536173" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><span data-t="plan2F2">Instalación y actualizaciones automáticas vía Play Store</span></li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#536173" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><span data-t="plan2F3">¿Tienes Android y quieres ayudar a probar la versión de Play Store?</span></li>
+            </ul>
+          </div>
+          <a class="btn secondary" id="testerLinkPlan" href="prueba.html" data-t="plan2Cta">Ir a guía de prueba cerrada →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="instalacion">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker" data-t="instKicker">Instalación en menos de 2 minutos</div>
+        <h2 data-t="instTitle">Cómo empezar con tu licencia de Gumroad</h2>
+        <p class="sec-desc" data-t="instDesc">Solo necesitas conexión a internet la primera vez para validar tu clave; después podrás operar sin internet todos los días.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3 data-t="s1Title">Compra en Gumroad</h3>
+          <p data-t="s1Desc">Al completar tu pago de $19.99 USD recibes acceso inmediato para descargar SoloPOS-v3.0.0.apk junto con tu clave de licencia única.</p>
+        </li>
+        <li>
+          <h3 data-t="s2Title">Instala el APK en Android</h3>
+          <p data-t="s2Desc">Abre el archivo descargado en tu teléfono o tableta Android. Si el sistema solicita permiso, activa «Permitir desde esta fuente».</p>
+        </li>
+        <li>
+          <h3 data-t="s3Title">Activa 1 vez y trabaja offline</h3>
+          <p data-t="s3Desc">Abre SoloPOS con internet por única vez y pega tu clave. Quedará activada de por vida en ese equipo (hasta 2 dispositivos por licencia).</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="preguntas">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker" data-t="faqKicker">Preguntas frecuentes</div>
+        <h2 data-t="faqTitle">Resolvemos tus dudas antes de comprar</h2>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary data-t="q1">¿Es pago único o tengo que pagar mensualidades?</summary>
+          <p data-t="a1">Es pago único de $19.99 USD. No cobramos mensualidades, rentas por sucursal ni comisiones por tus ventas.</p>
+        </details>
+        <details>
+          <summary data-t="q2">¿En cuántos dispositivos puedo activar mi clave de Gumroad?</summary>
+          <p data-t="a2">Cada clave de licencia permite activarse hasta en 2 dispositivos Android (por ejemplo, tu caja principal y un equipo de respaldo o cambio de teléfono).</p>
+        </details>
+        <details>
+          <summary data-t="q3">¿Funciona realmente sin internet después de activar?</summary>
+          <p data-t="a3">Sí. Solo necesitas conexión a internet una única vez para verificar la clave al abrir la app por primera vez. Después toda la base de datos opera 100% en tu dispositivo sin internet.</p>
+        </details>
+        <details>
+          <summary data-t="q4">¿Cuándo saldrá en Google Play Store?</summary>
+          <p data-t="a4">SoloPOS ya está en fase de prueba cerrada en Google Play y pronto estará disponible públicamente en la tienda. Mientras tanto puedes obtener la versión completa v3.0.0 hoy mismo desde Gumroad.</p>
+        </details>
+        <details>
+          <summary data-t="q5">¿Emite facturas electrónicas (CFDI / SAT) o procesa pagos con tarjeta?</summary>
+          <p data-t="a5">No. SoloPOS es una herramienta administrativa y de control operativo interno (inventario, tickets térmicos, mesas y cortes). No funge como PAC ante el SAT ni procesa cobros bancarios directamente.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top:none;padding-top:12px">
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2 data-t="ctaTitle">¿Listo para simplificar las ventas de tu negocio?</h2>
+          <p data-t="ctaDesc">Empieza hoy con SoloPOS v3.0.0 en Gumroad o escríbenos a juliocabrera9230@gmail.com si tienes cualquier pregunta.</p>
+        </div>
+        <div class="cta-band-actions">
+          <a class="btn" href="https://juliocraft4.gumroad.com/l/solopos" target="_blank" rel="noopener" data-t="ctaBuy">Comprar en Gumroad — $19.99 →</a>
+          <a class="btn secondary" href="mailto:juliocabrera9230@gmail.com" data-t="ctaContact">Contactar soporte</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div>
+      <strong style="color:var(--navy)" data-t="footBrand">SoloPOS · Hecho para trabajar sin conexión.</strong>
+      <div style="margin-top:6px"><span data-t="footDev">Desarrollado por Julio Antonio Cabrera González</span> · <a href="mailto:juliocabrera9230@gmail.com">juliocabrera9230@gmail.com</a></div>
+    </div>
+    <div class="footer-links">
+      <a href="https://juliocraft4.gumroad.com/l/solopos" target="_blank" rel="noopener">Gumroad ($19.99)</a>
+      <a href="politica-de-privacidad.html" data-t="footPrivacy">Política de privacidad</a>
+      <a href="terminos-y-condiciones.html" data-t="footTerms">Términos y condiciones</a>
+      <a href="prueba.html" data-t="footTestEs">Prueba cerrada (ES)</a>
+      <a href="testing.html" data-t="footTestEn">Closed Testing (EN)</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var T = {
+    es: {
+      pageTitle: "SoloPOS — Punto de Venta Offline para Android",
+      langBtn: "English",
+      navFeatures: "Funciones",
+      navPricing: "Precio",
+      navInstall: "Instalación",
+      navFaq: "Preguntas",
+      navBuy: "Comprar — $19.99",
+      heroEyebrow: "v3.0.0 · Android 7.0+ · 100% Offline · Pago único",
+      heroTitle: "Tu punto de venta completo en Android. Sin internet. Sin mensualidades.",
+      heroLead: "Registra ventas, controla inventario, organiza mesas o estaciones, imprime tickets Bluetooth y sincroniza varias cajas en tu Wi-Fi local — pagando una sola vez.",
+      heroBuy: "Comprar en Gumroad — $19.99 USD →",
+      playSoonTitle: "Próximamente en Google Play",
+      playSoonLink: "¿Quieres unirte a la prueba cerrada? →",
+      trust1: "Licencia hasta en 2 dispositivos Android",
+      trust2: "Sin suscripciones ni comisiones",
+      trust3: "Tus datos viven en tu equipo",
+      cardTagLive: "Disponible en Gumroad",
+      cardTagSoon: "Play Store: Próximamente",
+      cardPriceSub: "Pago único de por vida · Versión 3.0.0",
+      cardSpec1: "Instalador oficial SoloPOS-v3.0.0.apk firmado",
+      cardSpec2: "Clave única válida hasta en 2 dispositivos (caja + respaldo)",
+      cardSpec3: "Activación online 1 sola vez → 100% offline para siempre",
+      cardBuy: "Obtener licencia en Gumroad →",
+      cardFoot: "¿Prefieres esperar a Google Play? ",
+      cardFootLink: "Únete a la prueba cerrada",
+      featKicker: "Todo lo que tu negocio necesita",
+      featTitle: "Diseñado para cobrar rápido, incluso sin conexión",
+      featDesc: "Toda tu operación corre localmente en tu teléfono o tableta Android, sin depender de servidores externos ni caídas de internet.",
+      f1Title: "Ventas rápidas e inventario local",
+      f1Desc: "Registra ventas en segundos, controla existencias en tiempo real, aplica impuestos o descuentos y revisa cortes e historial.",
+      f2Title: "Áreas, mesas y estaciones",
+      f2Desc: "Organiza zonas de atención con mesas o estaciones personalizables, cuentas abiertas y estados visuales para restaurantes o cafeterías.",
+      f3Title: "Escáner con cámara (ML Kit)",
+      f3Desc: "Escanea códigos de barras al instante usando la cámara de tu dispositivo para buscar productos o registrar entradas sin lector externo.",
+      f4Title: "Impresoras Bluetooth ESC/POS",
+      f4Desc: "Imprime tickets de venta y comandas directamente en impresoras térmicas portátiles o de mostrador compatibles con ESC/POS.",
+      f5Title: "Multi-caja cifrada en tu Wi-Fi",
+      f5Desc: "Vincula dispositivos en tu misma red Wi-Fi local con comunicación cifrada para operar varias cajas sin subir tus datos a la nube.",
+      f6Title: "Respaldos locales (.solopos)",
+      f6Desc: "Exporta e importa copias completas de tu catálogo, ventas y configuración en archivos .solopos bajo tu control total.",
+      priceKicker: "Disponibilidad y licencia",
+      priceTitle: "Un solo pago. Sin rentas mensuales.",
+      priceDesc: "Descárgalo hoy mismo de forma directa en Gumroad o espera el lanzamiento público en Google Play Store.",
+      plan1Badge: "Disponible hoy · Descarga directa",
+      plan1Name: "Licencia SoloPOS en Gumroad",
+      plan1Note: "Pago único de por vida · Sin suscripciones ni comisiones",
+      plan1F1: "APK oficial SoloPOS v3.0.0 firmado (Android 7.0+)",
+      plan1F2: "Clave de licencia única válida hasta en 2 dispositivos",
+      plan1F3: "Todas las funciones desbloqueadas, 100% offline",
+      plan1F4: "Soporte directo por correo con el desarrollador",
+      plan1Cta: "Comprar en Gumroad — $19.99 USD →",
+      plan2Badge: "Próximamente en Play Store",
+      plan2Name: "Google Play Store",
+      plan2Status: "En prueba cerrada",
+      plan2Note: "Lanzamiento público próximo en Google Play",
+      plan2F1: "Cumpliendo la prueba cerrada obligatoria de 14 días en Google Play",
+      plan2F2: "Instalación y actualizaciones automáticas vía Play Store",
+      plan2F3: "¿Tienes Android y quieres ayudar a probar la versión de Play Store?",
+      plan2Cta: "Ir a guía de prueba cerrada →",
+      instKicker: "Instalación en menos de 2 minutos",
+      instTitle: "Cómo empezar con tu licencia de Gumroad",
+      instDesc: "Solo necesitas conexión a internet la primera vez para validar tu clave; después podrás operar sin internet todos los días.",
+      s1Title: "Compra en Gumroad",
+      s1Desc: "Al completar tu pago de $19.99 USD recibes acceso inmediato para descargar SoloPOS-v3.0.0.apk junto con tu clave de licencia única.",
+      s2Title: "Instala el APK en Android",
+      s2Desc: "Abre el archivo descargado en tu teléfono o tableta Android. Si el sistema solicita permiso, activa «Permitir desde esta fuente».",
+      s3Title: "Activa 1 vez y trabaja offline",
+      s3Desc: "Abre SoloPOS con internet por única vez y pega tu clave. Quedará activada de por vida en ese equipo (hasta 2 dispositivos por licencia).",
+      faqKicker: "Preguntas frecuentes",
+      faqTitle: "Resolvemos tus dudas antes de comprar",
+      q1: "¿Es pago único o tengo que pagar mensualidades?",
+      a1: "Es pago único de $19.99 USD. No cobramos mensualidades, rentas por sucursal ni comisiones por tus ventas.",
+      q2: "¿En cuántos dispositivos puedo activar mi clave de Gumroad?",
+      a2: "Cada clave de licencia permite activarse hasta en 2 dispositivos Android (por ejemplo, tu caja principal y un equipo de respaldo o cambio de teléfono).",
+      q3: "¿Funciona realmente sin internet después de activar?",
+      a3: "Sí. Solo necesitas conexión a internet una única vez para verificar la clave al abrir la app por primera vez. Después toda la base de datos opera 100% en tu dispositivo sin internet.",
+      q4: "¿Cuándo saldrá en Google Play Store?",
+      a4: "SoloPOS ya está en fase de prueba cerrada en Google Play y pronto estará disponible públicamente en la tienda. Mientras tanto puedes obtener la versión completa v3.0.0 hoy mismo desde Gumroad.",
+      q5: "¿Emite facturas electrónicas (CFDI / SAT) o procesa pagos con tarjeta?",
+      a5: "No. SoloPOS es una herramienta administrativa y de control operativo interno (inventario, tickets térmicos, mesas y cortes). No funge como PAC ante el SAT ni procesa cobros bancarios directamente.",
+      ctaTitle: "¿Listo para simplificar las ventas de tu negocio?",
+      ctaDesc: "Empieza hoy con SoloPOS v3.0.0 en Gumroad o escríbenos a juliocabrera9230@gmail.com si tienes cualquier pregunta.",
+      ctaBuy: "Comprar en Gumroad — $19.99 →",
+      ctaContact: "Contactar soporte",
+      footBrand: "SoloPOS · Hecho para trabajar sin conexión.",
+      footDev: "Desarrollado por Julio Antonio Cabrera González",
+      footPrivacy: "Política de privacidad",
+      footTerms: "Términos y condiciones",
+      footTestEs: "Prueba cerrada (ES)",
+      footTestEn: "Closed Testing (EN)",
+      testerHref: "prueba.html"
+    },
+    en: {
+      pageTitle: "SoloPOS — Offline Android Point of Sale",
+      langBtn: "Español",
+      navFeatures: "Features",
+      navPricing: "Pricing",
+      navInstall: "Install",
+      navFaq: "FAQ",
+      navBuy: "Buy — $19.99",
+      heroEyebrow: "v3.0.0 · Android 7.0+ · 100% Offline · One-time payment",
+      heroTitle: "Your complete Android point of sale. Offline-first. Zero monthly fees.",
+      heroLead: "Record sales, track inventory, manage tables or workstations, print Bluetooth receipts, and sync registers over local Wi-Fi — with a single one-time license.",
+      heroBuy: "Buy on Gumroad — $19.99 USD →",
+      playSoonTitle: "Coming soon on Google Play",
+      playSoonLink: "Want to join the closed test? →",
+      trust1: "Valid on up to 2 Android devices",
+      trust2: "No subscriptions or sales fees",
+      trust3: "Your data stays on your device",
+      cardTagLive: "Available on Gumroad",
+      cardTagSoon: "Play Store: Coming Soon",
+      cardPriceSub: "One-time lifetime payment · Version 3.0.0",
+      cardSpec1: "Official signed SoloPOS-v3.0.0.apk installer",
+      cardSpec2: "Unique license key valid for up to 2 devices (main + backup)",
+      cardSpec3: "One-time online activation → 100% offline forever",
+      cardBuy: "Get license on Gumroad →",
+      cardFoot: "Prefer to wait for Google Play? ",
+      cardFootLink: "Join the closed test",
+      featKicker: "Everything your shop needs",
+      featTitle: "Built to check out fast, even with zero internet",
+      featDesc: "Your entire operation runs locally on your Android phone or tablet — no cloud lock-in, no monthly rent, and no downtime.",
+      f1Title: "Fast checkout & local inventory",
+      f1Desc: "Ring up sales in seconds, track real-time stock, configure taxes or discounts, and review shifts and sales history.",
+      f2Title: "Areas, tables & workstations",
+      f2Desc: "Organize floor plans with customizable tables or stations, open tabs, and visual status tracking for cafes and restaurants.",
+      f3Title: "Camera barcode scanner (ML Kit)",
+      f3Desc: "Scan product barcodes instantly with your device camera to add items or count stock without extra hardware.",
+      f4Title: "Bluetooth ESC/POS printers",
+      f4Desc: "Print receipts and kitchen tickets directly to portable or countertop ESC/POS thermal printers over Bluetooth.",
+      f5Title: "Encrypted local Wi-Fi sync",
+      f5Desc: "Link multiple registers over your local Wi-Fi network with encrypted local communication — no external cloud required.",
+      f6Title: "Local backups (.solopos)",
+      f6Desc: "Export and restore complete backups of your catalog, sales, and settings in .solopos files under your full control.",
+      priceKicker: "Availability & pricing",
+      priceTitle: "One-time license. Zero recurring fees.",
+      priceDesc: "Get instant access today on Gumroad, or follow our upcoming public release on Google Play Store.",
+      plan1Badge: "Available today · Direct download",
+      plan1Name: "SoloPOS License on Gumroad",
+      plan1Note: "One-time lifetime payment · Zero subscriptions or fees",
+      plan1F1: "Official signed SoloPOS v3.0.0 APK (Android 7.0+)",
+      plan1F2: "Unique license key valid on up to 2 Android devices",
+      plan1F3: "All features unlocked, 100% offline operation",
+      plan1F4: "Direct email support from the developer",
+      plan1Cta: "Buy on Gumroad — $19.99 USD →",
+      plan2Badge: "Coming soon on Play Store",
+      plan2Name: "Google Play Store",
+      plan2Status: "In closed testing",
+      plan2Note: "Public Google Play launch coming soon",
+      plan2F1: "Completing Google Play's mandatory 14-day closed testing phase",
+      plan2F2: "Automatic store installation & updates via Google Play",
+      plan2F3: "Have an Android phone and want to volunteer for the Play Store test?",
+      plan2Cta: "View closed testing guide →",
+      instKicker: "Ready in under 2 minutes",
+      instTitle: "How to start with your Gumroad license",
+      instDesc: "Internet is required only once to activate your license key; after that, SoloPOS works 100% offline every day.",
+      s1Title: "Purchase on Gumroad",
+      s1Desc: "After your $19.99 USD one-time checkout, you get instant access to download SoloPOS-v3.0.0.apk and your unique license key.",
+      s2Title: "Install the APK on Android",
+      s2Desc: "Open the downloaded file on your Android phone or tablet. If Android prompts you, enable "Allow from this source".",
+      s3Title: "Activate once & work offline",
+      s3Desc: "Open SoloPOS online once and paste your license key. It stays activated permanently on that device (up to 2 devices per key).",
+      faqKicker: "Frequently asked questions",
+      faqTitle: "Clear answers before you buy",
+      q1: "Is this a one-time payment or a subscription?",
+      a1: "It is a single $19.99 USD payment. There are no monthly fees, per-store subscriptions, or commissions on your sales.",
+      q2: "How many devices can I activate with one Gumroad license?",
+      a2: "Each license key allows up to 2 Android device activations (for example, your main register plus a backup or replacement device).",
+      q3: "Does it really work 100% offline after activation?",
+      a3: "Yes. Internet is only needed once to verify your license key on first launch. After activation, your database runs 100% locally offline.",
+      q4: "When will SoloPOS launch on Google Play Store?",
+      a4: "SoloPOS is currently completing Google Play's closed testing phase and is coming soon to the Play Store. You can get the full v3.0.0 build right now on Gumroad.",
+      q5: "Does SoloPOS issue government tax e-invoices or process card payments?",
+      a5: "No. SoloPOS is an internal administrative and operational POS tool (inventory, thermal receipts, tables, and totals). It is not a certified tax PAC and does not process bank card payments.",
+      ctaTitle: "Ready to run your shop offline without monthly fees?",
+      ctaDesc: "Get SoloPOS v3.0.0 today on Gumroad or email juliocabrera9230@gmail.com with any questions.",
+      ctaBuy: "Buy on Gumroad — $19.99 →",
+      ctaContact: "Contact support",
+      footBrand: "SoloPOS · Built to work offline.",
+      footDev: "Built by Julio Antonio Cabrera González",
+      footPrivacy: "Privacy policy",
+      footTerms: "Terms and conditions",
+      footTestEs: "Prueba cerrada (ES)",
+      footTestEn: "Closed Testing (EN)",
+      testerHref: "testing.html"
+    }
+  };
+
+  var cardFootEl = document.querySelector('[data-t="cardFoot"]');
+  function setLang(lang) {
+    var d = T[lang] || T.es;
+    document.documentElement.lang = lang;
+    document.title = d.pageTitle;
+    document.getElementById("langToggle").textContent = d.langBtn;
+    var nodes = document.querySelectorAll("[data-t]");
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-t");
+      if (key === "cardFoot") continue;
+      if (d[key]) nodes[i].textContent = d[key];
+    }
+    cardFootEl.innerHTML = d.cardFoot + '<a id="testerLinkCard" href="' + d.testerHref + '">' + d.cardFootLink + '</a>.';
+    document.getElementById("testerLinkHero").setAttribute("href", d.testerHref);
+    document.getElementById("testerLinkPlan").setAttribute("href", d.testerHref);
+    try { localStorage.setItem("solopos_landing_lang", lang); } catch(e) {}
+  }
+
+  var initial = "es";
+  if (location.hash === "#en" || location.search.indexOf("lang=en") !== -1) {
+    initial = "en";
+  } else if (location.hash === "#es" || location.search.indexOf("lang=es") !== -1) {
+    initial = "es";
+  } else {
+    try {
+      var saved = localStorage.getItem("solopos_landing_lang");
+      if (saved === "en" || saved === "es") initial = saved;
+    } catch(e) {}
+  }
+  setLang(initial);
+
+  document.getElementById("langToggle").addEventListener("click", function() {
+    setLang(document.documentElement.lang === "es" ? "en" : "es");
+  });
+})();
+</script>
+</body>
+</html>
